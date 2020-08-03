@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ShopBridge.Models.ItemDTO>
+
+@{
+    ViewBag.Title = "List Of Items";
+}
+
+    <h2>List Of Items</h2>
+<hr />
+
+<p>
+    @Html.ActionLink("Add New Item", "Create",null,new { @Style="color:green;"})
+</p>
+@if (Model.Count() <= 0)
+{
+    <h2>NO DATA</h2>
+}
+else 
+{ 
+<table class="table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            <p>Action</p>
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.name, "Details", new { id = item.id })
+           @* @Html.DisplayFor(modelItem => item.name)*@
+        </td>   
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+           @* @Html.ActionLink("Edit", "Edit", new { id=item.id }) |*@
+           @* @Html.ActionLink("Details", "Details", new { id=item.id }) |*@
+           @Html.ActionLink("Delete", "Delete", new { id=item.id },new { @Style="color:red;"} )
+        </td>
+    </tr>
+}
+
+</table>
+}
